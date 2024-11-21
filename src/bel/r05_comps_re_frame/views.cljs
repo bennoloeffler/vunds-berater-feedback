@@ -42,7 +42,7 @@
                               not)
                           (-> (<sub [::rf/get [:consultant :value]])
                               (< 0)))
-            :on-click #(do (println "calling event...")
+            :on-click #(do (println "calling mail event...")
                            (evt-fn))}
    text])
 
@@ -68,7 +68,7 @@
     [:p [input-txt-get-set [:consultant :name] "Berater-Name"]]
     [:h3 "Wie bewerten Sie den Berater?"]
     [:h5 "Auf einer (sehr harten) Skala von 0 bis 10..."]
-    [:p "Zu Ihrer Orientierung hier ein paar Anhaltspunkte..."]
+    [:p "Zu Ihrer Orientierung hier ein paar Anhaltspunkte. Eine 4 oder 7 geht auch..."]
     [:p "0 = Naja… Wir sind nicht vollständig überzeugt. Passt nicht recht zu uns. Personen-Wechsel würde dem Projekt helfen."]
     [:p "5 = Solide Arbeit. Ergebnis in Ordnung. Dockt bei fast allen Kollegen gut an. Wenn das so bleibt, ist alles gut. Richtige Person für das Projekt und die Aufgabe."]
     [:p "10 = Wow! Einer der besten Berater bisher. Ansprache, Auftritt, Sach- und Sozialkompetenz überdurchschnittlich. Überraschend gute Wirkung im Projekt! Hinterlässt einen bleibenden Eindruck."]

@@ -54,14 +54,14 @@
    (let [db-new (if val
                   (assoc db :ping val)
                   (update db :ping (fnil inc 0)))]
-     (println db-new)
+     ;(println db-new)
      db-new)))
 
 (reg-event-db
  ::set
  (fn [db [_ path val]]
    (let [db-new (assoc-in db path val)]
-     (println db-new)
+     ;(println db-new)
      db-new)))
 
 ;; ========== SUBSCRIPTIONS ====================================================
@@ -78,5 +78,5 @@
 (reg-sub
  ::get
  (fn [db [_ path]]
-   (println "get: " path)
+   ;(println "get: " path)
    (get-in db path)))
