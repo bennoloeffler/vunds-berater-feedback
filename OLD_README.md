@@ -1,9 +1,17 @@
 # Feedback für V&S-Berater
 
 ## hosted here
+https://bennoloeffler.github.io/vunds-berater-feedback/  
+connects to decision-konsent to send mails!
+
+## usage
+Just send this link:  
 https://bennoloeffler.github.io/vunds-berater-feedback/
 
-connects to decision-konsent to send mails!
+
+THIS SHOULD WORK, BUT DOES NOT YET!  
+in order to pre-configure a consultants name, use a link like this:  
+https://bennoloeffler.github.io/vunds-berater-feedback/?consultant=Benno%20Löffler
 
 ## dev
 
