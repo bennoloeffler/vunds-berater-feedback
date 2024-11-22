@@ -1,7 +1,7 @@
 (ns bel.r05-comps-re-frame.views
   (:require [reagent.core :as r]
-            [bel.r05-comps-re-frame.rf :as rf :refer [<sub >evt <sub-lazy]]
-            [re-com.core :as re-com]))
+            [bel.r05-comps-re-frame.rf :as rf :refer [<sub >evt <sub-lazy]]))
+
 
 
 (defn input-num-get-set [path min max]
@@ -52,6 +52,24 @@
    [:hr]
    [:h2 text]])
 
+(defn button-with-succ []
+ [:<>
+  [button-cons "Bewertung absenden" #(do
+                                       (>evt [::rf/email]))]
+  ;(>evt [::rf/set [:consultant :value] -1])
+  ;(>evt [::rf/set [:consultant :name] nil])
+  ;(>evt [::rf/set [:consultant :kunde] nil])
+  ;(>evt [::rf/set [:consultant :comment] nil]))]
+
+  (when (<sub [::rf/get [:success]])
+    [:<>
+     [:div "Vielen Dank!"]
+     [:div "Sie können jetzt die nächste Bewertung eingeben..."]])
+  (when (<sub [::rf/get [:error]])
+    [:div
+     "Fehler beim Senden der E-Mail. Bitte nochmal senden. Falls es nicht klappt, bitte eine E-Mail an "
+     [:a {:href "mailto:tietz@v-und-s.de"} "tietz@v-und-s.de"]
+     ". Danke & Sorry."])])
 
 (defn main []
   [:<>
@@ -64,8 +82,7 @@
     ;[block "r/atom data "]
     ;[:pre (with-out-str (cljs.pprint/pprint (<sub [::rf/db])))]
 
-    [:p "Hier den Namen des Beraters eingeben: "]
-    [:p [input-txt-get-set [:consultant :name] "Berater-Name"]]
+
     [:h3 "Wie bewerten Sie den Berater?"]
     [:h5 "Auf einer (sehr harten) Skala von 0 bis 10..."]
     [:p "Zu Ihrer Orientierung hier ein paar Anhaltspunkte. Eine 4 oder 7 geht auch..."]
@@ -73,32 +90,26 @@
     [:p "5 = Solide Arbeit. Ergebnis in Ordnung. Dockt bei fast allen Kollegen gut an. Wenn das so bleibt, ist alles gut. Richtige Person für das Projekt und die Aufgabe."]
     [:p "10 = Wow! Einer der besten Berater bisher. Ansprache, Auftritt, Sach- und Sozialkompetenz überdurchschnittlich. Überraschend gute Wirkung im Projekt! Hinterlässt einen bleibenden Eindruck."]
 
-    [:p " hier können sie eine Zahl (0-10) eintragen"]
+    [:h5 "Hier den Namen des Beraters eingeben: "]
+    [:p [input-txt-get-set [:consultant :name] "Berater-Name"]]
+
+    [:h5 "Bewertung (0-10) eintragen"]
     [input-num-get-set [:consultant :value] -1 10]
     [range-get-set nil #_"oder den Slider nutzen... (0-10)" -1 10 [:consultant :value]]
     [:br]
-    [button-cons "Bewertung absenden" #(do
-                                         (>evt [::rf/email])
-                                         (>evt [::rf/set [:consultant :value] -1])
-                                         (>evt [::rf/set [:consultant :name] nil])
-                                         ;(>evt [::rf/set [:consultant :kunde] nil])
-                                         (>evt [::rf/set [:consultant :comment] nil]))]
-
-    (when (<sub [::rf/get [:success]])
-      [:div "Vielen Dank für Ihre Bewertung!"])
-    (when (<sub [::rf/get [:error]])
-      [:div "Oh - Fehler. Bitte nochmal senden."])
+    [button-with-succ]
     [:br]
     [:br]
     [:br]
     [:br]
-
+    [:h5 "Nur wenn Sie mögen: Kommentar und Ihr Name"]
     [:textarea {:rows        7
                 :value       (<sub [::rf/get [:consultant :comment]])
                 :on-change   #(>evt [::rf/set [:consultant :comment] (-> % .-target .-value)])
-                :placeholder "OPTIONAL: wenn Sie mögen - Kommentare, Hinweise, ..."}]
-    [input-txt-get-set [:consultant :kunde] "OPTIONAL: Ihr Name, Firma"] [:div "gerne auch annonym - einfach nichts eintragen."]
-
+                :placeholder "OPTIONAL: Kommentare, Hinweise, ..."}]
+    [input-txt-get-set [:consultant :kunde] "OPTIONAL: Ihr Name, Firma"] [:div "gerne auch annonym - einfach hier nichts eintragen."]
+    [:br]
+    ;[button-with-succ]
 
 
     [:footer
