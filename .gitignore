@@ -4,6 +4,7 @@
 /.shadow-cljs/
 /.clj-kondo/
 /.lsp/
+/.idea/
 /.calva/
 /*-init.clj
 /*.log

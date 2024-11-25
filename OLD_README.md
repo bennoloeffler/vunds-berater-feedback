@@ -16,9 +16,16 @@ https://bennoloeffler.github.io/vunds-berater-feedback/?consultant=Benno%20Löff
 ## dev
 
 ```shell
-#create pom
+# install dependencies
+npm install
+```
+
+```shell
+# create pom as basis for intellij cursive
 shadow-cljs pom
-#open that one in intellij
+#
+# open pom.xml  in intellij
+#
 ```
 
 to start the compiler:
@@ -26,10 +33,12 @@ to start the compiler:
 npm run watch
 ```
 
-open browser at http://localhost:8280
+open browser at  
+http://localhost:8280
 
 look here for starting repl:  
 https://shadow-cljs.github.io/docs/UsersGuide.html#_cursive
+
 
 ## deploy
 first of all, compile in production mode:
